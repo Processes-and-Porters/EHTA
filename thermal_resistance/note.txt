@@ -1,0 +1,6 @@
+Convention
+1.
+文件名为[<方法提出者>]--<特征码>--<相关的几何形状>。
+
+1.Files are named in pattern [<author of the method>]--<Character Code>--<most related shapes>.
+	
