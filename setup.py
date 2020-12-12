@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 '''
-可以简答介绍一下咱们这个EHTA
+
 '''
+import os
 
 from setuptools import setup 
  
@@ -52,9 +53,8 @@ setup(
   version = '0.1.0',
   description = description,
   author = 'EHTA team',
+  url = 'https://github.com/Processes-and-Porters/EHTA'
   platforms=["Windows", "Linux", "Mac OS", "Unix"],
-  author_email = '1239151479@qq.com',
-  url = 'https://github.com/steve-yyw/ehta',
   keywords = keywords,
   classifiers = classifiers,
 )
