@@ -2,8 +2,12 @@
 class tube(object) :
 
    inner_diameter = ""
+   Dti = "" #Tube inner diameter
+   Dt = "" #Tube outer diameter
    outer_diameter = ""
    wall_thickness = ""
+   Ltw = "" #Tube wall thickness
+   Lta = "" #Tube length
    length = ""
    outer_heat_transfer_area = ""
    cross_section_area = ""
