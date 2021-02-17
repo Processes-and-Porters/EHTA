@@ -1,32 +1,13 @@
-# tube is a shape 
 class tube(object) :
-
-   inner_diameter = ""
-   Dti = "" #Tube inner diameter
-   Dt = "" #Tube outer diameter
-   outer_diameter = ""
-   wall_thickness = ""
-   Ltw = "" #Tube wall thickness
-   Lta = "" #Tube length
-   length = ""
-   outer_heat_transfer_area = ""
-   cross_section_area = ""
-
-
-   def __init__(self,outer_diameter,wall_thickness,length):
-       self.outer_diameter = outer_diameter
-       self.wall_thickness = wall_thickness
-       self.inner_diameter = outer_diameter - wall_thickness
-       self.length = length
-
-   def outer_heat_transfer_area(self):       
-       return 3.14 * self.outer_diameter * self.length 
-
-   def inner_heat_transfer_area(self):       
-       return 3.14 * self.inner_diameter * self.length
-
-   def flow_cross_section_area(self):       
-       return 3.14 * self.inner_diameter**2.0 / 4.0
+# tube is-a shape 
+   def __init__(self,Dt_mm,Ltw_mm,Lta_mm):
+       self.Dt_mm = Dt_mm #Tube outer diameter, mm
+       self.Ltw_mm = Ltw_mm #Tube wall thickness, mm
+       self.Dti_mm = Dt_mm - Ltw_mm #Tube inner diameter, mm
+       self.Lta_mm = Lta_mm #Tube length of Active Heat Transfer Area, mm
+       self.Ata_mm2 = 3.14 * self.Dt_mm * self.Lta_mm #Active Outer Heat Transfer Area, mm2
+       self.Ati_mm2 = 3.14 * self.Dti_mm * self.Lta_mm #inner Heat Transfer Area, mm2
+       self.Ats_mm2 = 3.14 * self.Dti_mm**2.0 / 4.0#tube inner cross section Area, mm2
 
 class utube(object) :
     pass
