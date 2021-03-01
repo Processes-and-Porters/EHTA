@@ -1,4 +1,6 @@
 
+import math
+
 #The following py must be imported
 #emphtra.unit_conversion
 
@@ -13,15 +15,36 @@ class Gnielinski_TF_Tube(object):
       self.V_m3_s=V_m3_s
       self.objTube=objTube
       self.objFluid=objFluid
-      self.u_m_s=V_m3_s/m2fmm2(objTube.Ats_mm2)
-      
+
+  # Fluid Velocity
+  def u_m_s(self):
+      return self.V_m3_s/m2fmm2(self.objTube.Ats_mm2)
   # Renolds Number dimensionless
   def Re_1(self):
       return self.objFluid.rho_kg_m3 * \
-              self.u_m_s * \
+              self.u_m_s() * \
               mfmm(self.objTube.Dti_mm)
   # Prandl Number
   def Pr_1(self):
       return self.objFluid.Cp_J_kgK * \
               self.objFluid.mu_Pas / \
               sefl.objFluid.lambda_W_mK
+  # Friction factor
+  def f_1(self):
+      return ( 1.82 * math.log10(self.Re_1) - 1.64 ) ** (-2)
+  # Nusselt Number
+  def Nu_1(self):
+      return self.f_1()/8*(self.Re_1()-1000)*self.Pr_1() / \
+              ( 1.0 + 1.27 * (self.f_1())**0.5 * \
+                ( self.Pr_1() ** (2/3) -1 ) ) *\
+              ( 1.0 + \
+                (self.objTube.Dti_mm / self.objTube.Lta_mm) ** \
+                (2/3) )
+  # Heat transfer rate
+  def alpha_W_m2K(self):
+      return self.Nu_1() * \
+              self.objFluid.lambda_W_mK / \
+              mfmm(self.objTube.Dti_mm)
+  # Heat Resistence
+  def r_m2K_W(self):
+      return 1.0 / self.alpha_W_m2K()
