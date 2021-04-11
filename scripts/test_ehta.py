@@ -20,4 +20,3 @@ print(out_tube_rezu)
 print(tube_wall_rezu)
 print(in_tube_rezu + out_tube_rezu + tube_wall_rezu)
 
-print_test()

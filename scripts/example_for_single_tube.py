@@ -10,8 +10,7 @@ from shapes.tube_related import *
 from properties.fluid import *
 from thermal_resistance.SinglePhaseTurbulent_Inside_Pipe import *
 
-tube1 = tube(88.9,2.77,1000)
-tube2 = tube(114.3,2.77,1000)
+tube1 = tube(88.9,3.05,1000)
 
 dicProperty = { 'rho_kg_m3':1000.0,\
                 'mu_Pas':8.9*10**(-4),\
@@ -19,13 +18,13 @@ dicProperty = { 'rho_kg_m3':1000.0,\
                 'Cp_J_kgK':4187}
 water = fluid(dicProperty)
 
-TR_tube = Gnielinski_TF_Tube(tube1, water, m3_sfm3_h(10))
-Re=TR_tube.Re_1
-print(Re())
-print(TR_tube.u_m_s)
-
+TR_tube = Gnielinski_TF_Tube(tube1, water, m3_sfm3_h(60))
+print(tube1.Ats_mm2)
+print(TR_tube.u_m_s())
+print(TR_tube.Re_1())
+print(TR_tube.Pr_1())
+print(TR_tube.f_1())
+print(TR_tube.Nu_1())
+print(TR_tube.alpha_W_m2K())
 
 #testtube.outer_heat_transfer_area
-
-
-

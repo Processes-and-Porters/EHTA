@@ -5,7 +5,6 @@ import math
 #emphtra.unit_conversion
 
 from emphtra.unit_conversion import *
-from thermal_resistance.dimensionless_numbers import *
 
 class Gnielinski_TF_Tube(object):
     
@@ -23,15 +22,16 @@ class Gnielinski_TF_Tube(object):
   def Re_1(self):
       return self.objFluid.rho_kg_m3 * \
               self.u_m_s() * \
-              mfmm(self.objTube.Dti_mm)
+              mfmm(self.objTube.Dti_mm) / \
+              self.objFluid.mu_Pas
   # Prandl Number
   def Pr_1(self):
       return self.objFluid.Cp_J_kgK * \
               self.objFluid.mu_Pas / \
-              sefl.objFluid.lambda_W_mK
+              self.objFluid.lambda_W_mK
   # Friction factor
   def f_1(self):
-      return ( 1.82 * math.log10(self.Re_1) - 1.64 ) ** (-2)
+      return ( 1.82 * math.log10(self.Re_1()) - 1.64 ) ** (-2)
   # Nusselt Number
   def Nu_1(self):
       return self.f_1()/8*(self.Re_1()-1000)*self.Pr_1() / \
