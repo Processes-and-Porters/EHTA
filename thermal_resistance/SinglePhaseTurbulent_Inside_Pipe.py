@@ -6,8 +6,9 @@ import math
 
 from emphtra.unit_conversion import *
 
+#Gnielinski
 class Gnielinski_TF_Tube(object):
-    
+#Please Refer to HEDH 1983 2.5.1 (41)    
   def __init__(self,objTube,objFluid,V_m3_s):
   # objTube is an instance of class tube
   # objFluid is an instance of class fluid

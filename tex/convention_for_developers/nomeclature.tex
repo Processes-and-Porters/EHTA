@@ -1,1 +1,20 @@
-documentclass 
+\documentclass{report}
+\usepackage{amsmath}
+\usepackage{xeCJK}
+\begin{document}
+\begin{tabular}{llll}
+	Quantity & Symbol in text & Symbol in scripts & Units \\
+	\hline
+	tube outer diameter & $D_t$ & Dt\_mm & mm \\
+	tube wall thickness & $L_{tw}$ & Ltw\_mm & mm 
+\end{tabular}
+
+
+conventions for Symbol in scripts:
+\begin{itemize}  
+	\item The unit symbol and quantity symbol are seperated via "\_".
+	\item A division slash is replaced with "\_".
+	\item A unit's power is directly is expressed by an integer directly behind that unit.
+\end{itemize}
+
+\end{document}
