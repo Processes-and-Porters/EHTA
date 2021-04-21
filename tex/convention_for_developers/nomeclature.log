@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2020.4.6)  12 APR 2021 22:12
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2020.4.6)  13 APR 2021 22:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -457,16 +457,21 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 4.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 4.
- [1
+
+Overfull \hbox (7.62006pt too wide) in paragraph at lines 6--16
+[][] 
+ []
+
+[1
 
 ] (./nomeclature.aux) ) 
 Here is how much of TeX's memory you used:
  13878 strings out of 492916
  316291 string characters out of 6133346
- 396615 words of memory out of 5000000
+ 397615 words of memory out of 5000000
  17934 multiletter control sequences out of 15000+600000
  532864 words of font info for 35 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 44i,8n,64p,362b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,12n,64p,362b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on nomeclature.pdf (1 page).

@@ -18,7 +18,7 @@ class Gnielinski_TF_Tube(object):
 
   # Fluid Velocity
   def u_m_s(self):
-      return self.V_m3_s/m2fmm2(self.objTube.Ats_mm2)
+      return self.V_m3_s/m2fmm2(self.objTube.St_mm2)
   # Renolds Number dimensionless
   def Re_1(self):
       return self.objFluid.rho_kg_m3 * \
@@ -39,7 +39,7 @@ class Gnielinski_TF_Tube(object):
               ( 1.0 + 1.27 * (self.f_1())**0.5 * \
                 ( self.Pr_1() ** (2/3) -1 ) ) *\
               ( 1.0 + \
-                (self.objTube.Dti_mm / self.objTube.Lta_mm) ** \
+                (self.objTube.Dti_mm / self.objTube.Lt_mm) ** \
                 (2/3) )
   # Heat transfer rate
   def alpha_W_m2K(self):
