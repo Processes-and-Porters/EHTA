@@ -18,7 +18,7 @@ dicProperty = { 'rho_kg_m3':1000.0,\
                 'Cp_J_kgK':4187}
 water = fluid(dicProperty)
 
-TR_tube = Gnielinski_TF_Tube(tube1, water, m3_sfm3_h(60))
+TR_tube = GnielinskiTurbulentFlowTube(tube1, water, m3_sfm3_h(60))
 print(tube1.St_mm2)
 print(TR_tube.u_m_s())
 print(TR_tube.Re_1())
