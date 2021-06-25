@@ -27,10 +27,36 @@ class GnielinskiTurbulentFlowTube(object):
         self.V_m3_s=V_m3_s
         self.objTube=objTube
         self.objFluid=objFluid
+
+    # Find the task
+    def task_definer(self,node1,node2):
+        '''define the task for this element
+
+           node1(T1,Q1),node2(T2,Q2)
+           T1      T2      Q1        Q2     default    input    output/overide
+           <>""    =""     <>""      =""    any        T1,Q1    Q2=Q1,T2    
+           <>""    =""     =""       <>""   any        T1,Q2    Q1=Q2,T2    
+           <>""    =""     =""       =""    any                 exception: insufficient input    
+           >T2     <>""    <>""      =""    heating    T1,Q1    Q1=Q2,T2    
+           >T2     <>""    =""       <>""   heating    T1,Q2    Q1=Q2,T2    
+           <>""    >T1     <>""      =""    heating    T2,Q1    Q2=Q1,T1    
+           <>""    >T1     <>""      =""    heating    T2,Q1    Q2=Q1,T1    
+           any     any    <>""&!=Q2  <>""   any        T1,Q1    Q1=Q2,T2    
+
+
+
+                   node1          node2          result 
+            case   T_C    Q_kW    T_C    Q_kW    
+            1      Any    Q1/Q2   Any    Q2/Q1   exception:heat unbalance
+            2      Any    ""/Any  Any    Any/""   
+
+        '''
         if node1["Q_kW"] != node2["Q_kW"] \
                 and node1["Q_kW"] != ""\
                 and node2["Q_kW"] != "":
-                  raise InvalidNodeError("heat unbalance") 
+            raise InvalidNodeError("heat unbalance") 
+       
+
 
     # Fluid Velocity
     def u_m_s(self):
@@ -42,16 +68,16 @@ class GnielinskiTurbulentFlowTube(object):
               mfmm(self.objTube.Dti_mm) / \
               self.objFluid.mu_Pas
   # Prandl Number
-    def Pr_1(self):
-        return self.objFluid.Cp_J_kgK * \
+     def Pr_1(self):
+         return self.objFluid.Cp_J_kgK * \
                 self.objFluid.mu_Pas / \
                 self.objFluid.lambda_W_mK
   # Friction factor
-    def f_1(self):
-        return ( 1.82 * math.log10(self.Re_1()) - 1.64 ) ** (-2)
+     def f_1(self):
+         return ( 1.82 * math.log10(self.Re_1()) - 1.64 ) ** (-2)
   # Nusselt Number
-    def Nu_1(self):
-        return self.f_1()/8*(self.Re_1()-1000)*self.Pr_1() / \
+     def Nu_1(self):
+         return self.f_1()/8*(self.Re_1()-1000)*self.Pr_1() / \
                   ( 1.0 + 1.27 * (self.f_1())**0.5 * \
                   ( self.Pr_1() ** (2/3) -1 ) ) *\
                   ( 1.0 + \
