@@ -46,7 +46,7 @@ class GnielinskiTurbulentFlowTube(object):
             <T2    !=""     =""       !=""    cooling    T1,Q2    Q1=Q2,T2    
            !=""     <T1    !=""        =""    cooling    T2,Q1    Q2=Q1,T1    
            !=""     <T1     =""       !=""    cooling    T2,Q2    Q2=Q1,T1    
-           any     any    !=""&!=Q2   !=""    any        T1,Q1    exception: heat unbalance
+           any     any    !=""&!=Q2   !=""    any                 exception: heat unbalance
 
         '''
         if node1["Q_kW"] != node2["Q_kW"] \
