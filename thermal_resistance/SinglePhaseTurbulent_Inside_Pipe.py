@@ -40,15 +40,12 @@ class GnielinskiTurbulentFlowTube(object):
            >T2     <>""    <>""      =""    heating    T1,Q1    Q1=Q2,T2    
            >T2     <>""    =""       <>""   heating    T1,Q2    Q1=Q2,T2    
            <>""    >T1     <>""      =""    heating    T2,Q1    Q2=Q1,T1    
+           <>""    >T1     =""      <>""    heating    T2,Q1    Q2=Q1,T1    
+           >T2     <>""    <>""      =""    cooling    T1,Q1    Q1=Q2,T2    
+           >T2     <>""    =""       <>""   heating    T1,Q2    Q1=Q2,T2    
            <>""    >T1     <>""      =""    heating    T2,Q1    Q2=Q1,T1    
-           any     any    <>""&!=Q2  <>""   any        T1,Q1    Q1=Q2,T2    
-
-
-
-                   node1          node2          result 
-            case   T_C    Q_kW    T_C    Q_kW    
-            1      Any    Q1/Q2   Any    Q2/Q1   exception:heat unbalance
-            2      Any    ""/Any  Any    Any/""   
+           <>""    >T1     =""      <>""    heating    T2,Q1    Q2=Q1,T1    
+           any     any    <>""&!=Q2  <>""   any        T1,Q1    exception: heat unbalance
 
         '''
         if node1["Q_kW"] != node2["Q_kW"] \
