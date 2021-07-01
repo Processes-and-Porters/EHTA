@@ -33,19 +33,20 @@ class GnielinskiTurbulentFlowTube(object):
         '''define the task for this element
 
            node1(T1,Q1),node2(T2,Q2)
-           T1      T2      Q1        Q2     default    input    output/overide
-           <>""    =""     <>""      =""    any        T1,Q1    Q2=Q1,T2    
-           <>""    =""     =""       <>""   any        T1,Q2    Q1=Q2,T2    
-           <>""    =""     =""       =""    any                 exception: insufficient input    
-           >T2     <>""    <>""      =""    heating    T1,Q1    Q1=Q2,T2    
-           >T2     <>""    =""       <>""   heating    T1,Q2    Q1=Q2,T2    
-           <>""    >T1     <>""      =""    heating    T2,Q1    Q2=Q1,T1    
-           <>""    >T1     =""      <>""    heating    T2,Q1    Q2=Q1,T1    
-           >T2     <>""    <>""      =""    cooling    T1,Q1    Q1=Q2,T2    
-           >T2     <>""    =""       <>""   heating    T1,Q2    Q1=Q2,T2    
-           <>""    >T1     <>""      =""    heating    T2,Q1    Q2=Q1,T1    
-           <>""    >T1     =""      <>""    heating    T2,Q1    Q2=Q1,T1    
-           any     any    <>""&!=Q2  <>""   any        T1,Q1    exception: heat unbalance
+            T1      T2      Q1         Q2     mode       input    output/overide
+           -----------------------------------------------------------------------------------
+           !=""     =""    !=""        =""    any        T1,Q1    Q2=Q1,T2    
+           !=""     =""     =""       !=""    any        T1,Q2    Q1=Q2,T2    
+           !=""     =""     =""        =""    any                 exception: insufficient input    
+            >T2    !=""    !=""        =""    heating    T1,Q1    Q1=Q2,T2    
+            >T2    !=""     =""       !=""    heating    T1,Q2    Q1=Q2,T2    
+           !=""     >T1    !=""        =""    heating    T2,Q1    Q2=Q1,T1    
+           !=""     >T1     =""       !=""    heating    T2,Q2    Q2=Q1,T1    
+            <T2    !=""    !=""        =""    cooling    T1,Q1    Q1=Q2,T2    
+            <T2    !=""     =""       !=""    cooling    T1,Q2    Q1=Q2,T2    
+           !=""     <T1    !=""        =""    cooling    T2,Q1    Q2=Q1,T1    
+           !=""     <T1     =""       !=""    cooling    T2,Q2    Q2=Q1,T1    
+           any     any    !=""&!=Q2   !=""    any        T1,Q1    exception: heat unbalance
 
         '''
         if node1["Q_kW"] != node2["Q_kW"] \
