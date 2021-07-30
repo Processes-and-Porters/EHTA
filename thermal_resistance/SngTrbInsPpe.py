@@ -19,9 +19,9 @@ class GnielinskiTurbulentFlowTube(object):
     '''
     
   #Please Refer to HEDH 1983 2.5.1 (41)    
-    def __init__(self,objTube,objFluid,
-            V_m3_s,
-            node1 = {"T_C" : 25, "Q_kW" : 0},node2 = {"T_C" : 25, "Q_kW" : 0}):
+    def __init__(self,objTube,objFluid, V_m3_s,
+            node1 = {"T_C" : 25, "Q_kW" : 0},
+            node2 = {"T_C" : 25, "Q_kW" : 0}):
     # objTube is an instance of class tube
     # objFluid is an instance of class fluid
         self.V_m3_s=V_m3_s
@@ -35,9 +35,12 @@ class GnielinskiTurbulentFlowTube(object):
            node1(T1,Q1),node2(T2,Q2)
             T1      T2      Q1         Q2     mode       input    output/overide
            -----------------------------------------------------------------------------------
+           !=""     =""     =""        =""    any                 exception: insufficient input 
+            =""    !=""     =""        =""    any                 exception: insufficient input 
+           any     any    !=""&!=Q2   !=""    any                 exception: heat unbalance
+
            !=""     =""    !=""        =""    any        T1,Q1    Q2=Q1,T2    
            !=""     =""     =""       !=""    any        T1,Q2    Q1=Q2,T2    
-           !=""     =""     =""        =""    any                 exception: insufficient input    
             >T2    !=""    !=""        =""    heating    T1,Q1    Q1=Q2,T2    
             >T2    !=""     =""       !=""    heating    T1,Q2    Q1=Q2,T2    
            !=""     >T1    !=""        =""    heating    T2,Q1    Q2=Q1,T1    
@@ -46,13 +49,24 @@ class GnielinskiTurbulentFlowTube(object):
             <T2    !=""     =""       !=""    cooling    T1,Q2    Q1=Q2,T2    
            !=""     <T1    !=""        =""    cooling    T2,Q1    Q2=Q1,T1    
            !=""     <T1     =""       !=""    cooling    T2,Q2    Q2=Q1,T1    
-           any     any    !=""&!=Q2   !=""    any                 exception: heat unbalance
 
         '''
+        #rule out three exceptions
         if node1["Q_kW"] != node2["Q_kW"] \
-                and node1["Q_kW"] != ""\
-                and node2["Q_kW"] != "":
-            raise InvalidNodeError("heat unbalance") 
+                and node1["Q_kW"] != "" and node2["Q_kW"] != "":
+                    raise InvalidNodeError("heat unbalance") 
+        elif node1["T_C"] != "" and node2["T_C"] = "" \
+                and node1["Q_kW"] = "" and node2["Q_kW"] = "" :
+                    raise InvalidNodeError("insufficient input")
+        elif node1["T_C"] = "" and node2["T_C"] != "" \
+                and node1["Q_kW"] = "" and node2["Q_kW"] = "" :
+                    raise InvalidNodeError("insufficient input")
+        else
+            #set Q
+            if node1["Q_kW"] != "" and node2["Q_kW"] = "" :
+                node2["Q_kW"] = node1["Q_kW"]
+            elif node2["Q_kW"] != "" and node1["Q_kW"] = "" :
+                node1["Q_kW"] = node2["Q_kW"]
        
 
 
