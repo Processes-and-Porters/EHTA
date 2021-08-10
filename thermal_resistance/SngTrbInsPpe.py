@@ -50,6 +50,8 @@ class GnielinskiTurbulentFlowTube(object):
            !=""     <T1    !=""        =""    cooling    T2,Q1    Q2=Q1,T1    
            !=""     <T1     =""       !=""    cooling    T2,Q2    Q2=Q1,T1    
 
+           !=""     !=""    =""        =""    any        T1,T2    Q1,Q2=Q1
+
         '''
         #rule out three exceptions
         if node1["Q_kW"] != node2["Q_kW"] \
@@ -67,6 +69,8 @@ class GnielinskiTurbulentFlowTube(object):
                 node2["Q_kW"] = node1["Q_kW"]
             elif node2["Q_kW"] != "" and node1["Q_kW"] = "" :
                 node1["Q_kW"] = node2["Q_kW"]
+            #set T
+            if node1[""] 
        
 
 
