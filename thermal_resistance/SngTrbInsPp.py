@@ -12,7 +12,7 @@ from emphtra.exceptions import *
 
 
 #Gnielinski
-class GnielinskiTurbulentFlowTube(object):
+class GnielinskiSngTrbInsPp(object):
     '''caculate in tube turbulent flow heat transfer coefficient
     
     
@@ -28,6 +28,7 @@ class GnielinskiTurbulentFlowTube(object):
         self.V_m3_s=V_m3_s
         self.objTube=objTube
         self.objFluid=objFluid
+        self.node_initializer(node1,node2)
 
     # Find the task
     def node_initializer(self,node1,node2):
@@ -71,29 +72,29 @@ class GnielinskiTurbulentFlowTube(object):
                 and node1["Q_kW"] == "" and node2["Q_kW"] == "" :
                     raise InvalidNodeError("insufficient input")
         if node1["T_C"] == "" and node2["T_C"] != "" \
-                and node1["Q_kW"] != "" and node2["Q_kW"] = "" :
+                and node1["Q_kW"] != "" and node2["Q_kW"] == "" :
                     raise InvalidNodeError("insufficient input")
 
         # a special case where only temperatures are set
-        if node1["Q_kW"] == "" and node2["Q_kW"] == ""
+        if node1["Q_kW"] == "" and node2["Q_kW"] == "" :
             pass
-        else
+        else:
             #set Q
             if node1["Q_kW"] != "" and node2["Q_kW"] == "" :
                 node2["Q_kW"] == node1["Q_kW"]
             elif node2["Q_kW"] != "" and node1["Q_kW"] == "" :
                 node1["Q_kW"] == node2["Q_kW"]
             #set T
-            if self.mode = "heating" :
+            if self.mode == "heating" :
                 if node1["T_C"] > node2["T_C"] :
-                    node2["T_C"] = ""
-                else
-                    node1["T_C"] = ""
-            if self.mode = "cooling" :
+                    node2["T_C"] == ""
+                else:
+                    node1["T_C"] == ""
+            if self.mode == "cooling" :
                 if node1["T_C"] < node2["T_C"] :
-                    node2["T_C"] = ""
-                else
-                    node1["T_C"] = ""
+                    node2["T_C"] == ""
+                else:
+                    node1["T_C"] == ""
 
     # Fluid Velocity
     def u_m_s(self):
@@ -104,16 +105,16 @@ class GnielinskiTurbulentFlowTube(object):
               self.u_m_s() * \
               mfmm(self.objTube.Dti_mm) / \
               self.objFluid.mu_Pas
-  # Prandl Number
-     def Pr_1(self):
+    # Prandl Number
+    def Pr_1(self):
          return self.objFluid.Cp_J_kgK * \
                 self.objFluid.mu_Pas / \
                 self.objFluid.lambda_W_mK
   # Friction factor
-     def f_1(self):
+    def f_1(self):
          return ( 1.82 * math.log10(self.Re_1()) - 1.64 ) ** (-2)
   # Nusselt Number
-     def Nu_1(self):
+    def Nu_1(self):
          return self.f_1()/8*(self.Re_1()-1000)*self.Pr_1() / \
                   ( 1.0 + 1.27 * (self.f_1())**0.5 * \
                   ( self.Pr_1() ** (2/3) -1 ) ) *\
